@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Chronicles of WWII</string>
+    <string name="mission0">Морской Лев</string>
+    <string name="mission1">Арденнская Операция 1940</string>
+    <string name="mission2">План Барбаросса</string>
+    <string name="mission3">Битва за Мидвей</string>
+    <string name="mission4">Высадка в Сицилии</string>
+    <string name="mission5">Высадка в Нормандии</string>
+
+
+</resources>

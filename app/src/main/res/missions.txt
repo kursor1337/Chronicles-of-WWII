@@ -1,0 +1,24 @@
+-----------------------------
+id
+name
+Player1
+Player2
+Enemy Enemy2
+-----------------------------
+0
+SeaLion
+6 3 2
+6 3 2
+BRITAIN GERMANY
+-----------------------------
+1
+SeaLion2
+6 3 2
+6 3 2
+BRITAIN GERMANY
+-----------------------------
+2
+SeaLion3
+6 3 2
+6 3 2
+BRITAIN GERMANY
