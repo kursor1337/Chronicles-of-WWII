@@ -143,7 +143,8 @@ public class ConnectActivity extends Activity {
                 Gson gson = new Gson();
                 String inetAddress = gson.toJson(hostAddress);
                 Intent intent = new Intent(ConnectActivity.this, GameScreen.class);
-                intent.putExtra(WiFiNetwork.SERVER, false).putExtra(WiFiNetwork.HOST_ADDRESS, inetAddress);
+                intent.putExtra(Engine.MODE, Engine.MULTI_PLAYER).putExtra(Engine.ROLE, Engine.IS_CLIENT).
+                        putExtra(WiFiNetwork.HOST_ADDRESS, inetAddress);
                 startActivity(intent);
                 Toast.makeText(ConnectActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }

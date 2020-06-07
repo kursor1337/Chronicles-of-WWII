@@ -1,7 +1,5 @@
 package com.kypcop.chroniclesofwwii.game.Logic.Missions;
 
-import android.content.Context;
-import android.widget.Button;
 import com.kypcop.chroniclesofwwii.game.Logic.Nation;
 import com.kypcop.chroniclesofwwii.game.Logic.Player.Player;
 
@@ -20,7 +18,6 @@ public class Mission{
     private int player2Artillery;
     private Player player1;
     private Player player2;
-    private Button button;
 
     Mission(int id, String name, String intro,
             Nation enemy1, int player1Infantry, int player1Armored, int player1Artillery,
@@ -41,14 +38,6 @@ public class Mission{
     }
 
 
-    public Button getButton() {
-        return button;
-    }
-
-    public void createButton(Context context) {
-        this.button = new Button(context);
-        button.setText(name);
-    }
 
     public void setIntro(String id){
         intro = id;

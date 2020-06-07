@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -23,9 +24,15 @@ import com.kypcop.chroniclesofwwii.game.Network.ConnectActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kypcop.chroniclesofwwii.game.Engine.IS_CLIENT;
+import static com.kypcop.chroniclesofwwii.game.Engine.IS_SERVER;
+import static com.kypcop.chroniclesofwwii.game.Engine.MODE;
+import static com.kypcop.chroniclesofwwii.game.Engine.MULTI_PLAYER;
+import static com.kypcop.chroniclesofwwii.game.Engine.ROLE;
+import static com.kypcop.chroniclesofwwii.game.Engine.SINGLE_PLAYER;
+
 public class LaunchMenuScreen extends Activity {
     Button start, server, connect, new_scenario; //main menu with some buttons
-    public static boolean isServer = false;
     private LocationManager locationManager;
     private WifiManager wifiManager;
 
@@ -44,7 +51,16 @@ public class LaunchMenuScreen extends Activity {
         }
 
         //listener on the button to go to the mission menu screen
-        start.setOnClickListener(new View.OnClickListener() {
+
+         start.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(LaunchMenuScreen.this, MissionMenuScreen.class);
+                 intent.putExtra(MODE, SINGLE_PLAYER);
+                 startActivity(intent);
+             }
+         });
+        server.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requestLocationTurnOn();
@@ -55,6 +71,7 @@ public class LaunchMenuScreen extends Activity {
 
                     if(isLocationPermissionGranted() &&  wifiManager.isWifiEnabled()){
                         Intent intent = new Intent(LaunchMenuScreen.this, MissionMenuScreen.class);
+                        intent.putExtra(MODE, MULTI_PLAYER).putExtra(ROLE, IS_SERVER);
                         startActivity(intent);
                     } else if(!wifiManager.isWifiEnabled()){
                         Toast.makeText(LaunchMenuScreen.this, "Не удалось включить Wi-Fi :(", Toast.LENGTH_SHORT).show();
@@ -73,6 +90,7 @@ public class LaunchMenuScreen extends Activity {
 
                     if(isLocationPermissionGranted() && wifiManager.isWifiEnabled()){
                         Intent intent = new Intent(LaunchMenuScreen.this, ConnectActivity.class);
+                        intent.putExtra(MODE, MULTI_PLAYER).putExtra(ROLE, IS_CLIENT);
                         startActivity(intent);
                     } else if(!wifiManager.isWifiEnabled()){
                         Toast.makeText(LaunchMenuScreen.this, "Не удалось включить Wi-Fi :(", Toast.LENGTH_SHORT).show();
@@ -111,11 +129,7 @@ public class LaunchMenuScreen extends Activity {
 
     private boolean isLocationPermissionGranted() {
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        if(result == PackageManager.PERMISSION_GRANTED){
-            return true;
-        } else{
-            return false;
-        }
+        return result == PackageManager.PERMISSION_GRANTED;
     }
 
     private void requestLocationPermission(){
@@ -127,7 +141,7 @@ public class LaunchMenuScreen extends Activity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults){
         List<Integer> grantResultsList = new ArrayList<>();
         for(int i: grantResults){
             grantResultsList.add(i);

@@ -9,15 +9,15 @@
         android:id="@+id/startText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Дарова собутыльник"
-        android:textSize="30dp">
+        android:text="Добро Пожаловать!"
+        android:textSize="30sp">
     </TextView>
 
     <Button
         android:id="@+id/start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Начать">
+        android:text="Начать кампанию">
     </Button>
 
     <Button

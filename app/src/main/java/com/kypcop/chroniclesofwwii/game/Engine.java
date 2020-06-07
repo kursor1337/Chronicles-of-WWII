@@ -21,6 +21,13 @@ public class Engine {
 
     public static final WiFiNetwork NETWORK = new WiFiNetwork();
 
+    public static final int IS_SERVER = 712;
+    public static final int IS_CLIENT = 713;
+    public static final int SINGLE_PLAYER = 1714;
+    public static final int MULTI_PLAYER = 1715;
+    public static final String MODE = "mode";
+    public static final String ROLE = "role";
+
     private static int turn = 0;
     private Division chosenDivision;
     private Move currentMove;
@@ -37,7 +44,7 @@ public class Engine {
             } else{
                 showText("Не ваш ход");
             }
-            NETWORK.sendId(id);
+            NETWORK.sendIdByNet(id);
         }
     };
 
@@ -51,7 +58,7 @@ public class Engine {
             j = board.getSize() - 1 - j;
             String s = i + Integer.toString(j);
             id = Integer.parseInt(s);
-            NETWORK.sendId(id);
+            NETWORK.sendIdByNet(id);
         }
     };
 
@@ -89,10 +96,6 @@ public class Engine {
         player2 = mission.getPlayer2();
         hud.setControlListeners(player2divClick);
         board = new Board(gameScreen, 6);
-
-        NETWORK.connectEngine(this);
-
-
     }
 
     /**
@@ -234,5 +237,9 @@ public class Engine {
             chosenDivision = hud.getPlayerControls(Player.FIRST).get(index).getOneDivision();
         }
         handleAction(id);
+    }
+
+    public GameScreen getGameScreen() {
+        return gameScreen;
     }
 }

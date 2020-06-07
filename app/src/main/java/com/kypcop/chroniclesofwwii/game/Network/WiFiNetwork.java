@@ -1,25 +1,20 @@
 package com.kypcop.chroniclesofwwii.game.Network;
 
 import android.os.Handler;
-import android.os.Message;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.kypcop.chroniclesofwwii.game.Engine;
 import com.kypcop.chroniclesofwwii.game.Logic.Missions.Mission;
 import com.kypcop.chroniclesofwwii.game.Screen.GameScreen;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 public class WiFiNetwork extends Thread{
 
@@ -30,50 +25,65 @@ public class WiFiNetwork extends Thread{
     public static final String HOST_ADDRESS = "hostAddress";
     public static final Gson GSON = new Gson();
 
-    private ServerThread serverThread = null;
-    private ClientThread clientThread = null;
     private Transfer transfer;
+    private final Object missionInitWait = new Object();
 
     private Engine engine;
+    private volatile Mission mission;
+
     private GameScreen gameScreen;
-    Mission mission;
 
 
 
 
-    public void connectEngine(Engine engine){
+
+    public void connectEngineAndScreen(Engine engine){
         this.engine = engine;
+        this.gameScreen = engine.getGameScreen();
+    }
+
+    public void connectScreenToNetwork(GameScreen gameScreen){
+        this.gameScreen = gameScreen;
+    }
+
+    public void disconnect(){
+
+    }
+
+    public void setServerMission(Mission mission){
+        synchronized (missionInitWait) {
+            this.mission = mission;
+            missionInitWait.notifyAll();
+        }
+
     }
 
 
-    public void initializeServer(Mission mission, Handler handler){
+    public void initializeServer(Handler handler){
         isServer = true;
-        serverThread = new ServerThread(mission, handler);
+        ServerThread serverThread = new ServerThread(handler);
         serverThread.start();
     }
 
     public void initializeClient(InetAddress inetAddress){
         isServer = false;
-        clientThread = new ClientThread(inetAddress);
+        ClientThread clientThread = new ClientThread(inetAddress);
         clientThread.start();
-    }
-
-    private void sendInfoByJson(Mission mission){
-        if(isServer){
-            String info = GSON.toJson(mission);
-            transfer.sendString(info);
-        }
+        Log.i("Kypcop1337", "clientInitialized");
     }
 
     public void sendMissionInfoToGameScreen(GameScreen gameScreen){
-        synchronized(mission){
+        Log.i("Kypcop1337", "DickBig");
+        synchronized(missionInitWait){
             while(mission == null){
                 try {
-                    mission.wait();
+                    missionInitWait.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            Log.i("Kypcop1337", "DickBig2");
+            notifyAll();
             gameScreen.receiveMissionInfo(mission);
         }
     }
@@ -93,7 +103,7 @@ public class WiFiNetwork extends Thread{
      * method for sending id to another player
      * @param value
      */
-    public void sendId(int value){
+    public void sendIdByNet(int value){
         if(transfer != null){
             transfer.sendId(value);
         }
@@ -107,8 +117,7 @@ public class WiFiNetwork extends Thread{
         Mission mission;
         Handler handler;
 
-        ServerThread(Mission mission, Handler handler){
-            this.mission = mission;
+        ServerThread(Handler handler){
             this.handler = handler;
         }
 
@@ -120,9 +129,22 @@ public class WiFiNetwork extends Thread{
                 handler.obtainMessage(1);
                 transfer = new Transfer(socket);
                 transfer.start();
-                sendInfoByJson(mission);
-            } catch (IOException exception) {
+                synchronized (missionInitWait){
+                    while(mission == null){
+                       missionInitWait.wait();
+                    }
+                    sendInfoByJson(mission);
+
+                }
+            } catch (IOException | InterruptedException exception) {
                 exception.printStackTrace();
+            }
+        }
+
+        private void sendInfoByJson(Mission mission){
+            if(isServer){
+                String info = GSON.toJson(mission);
+                transfer.sendString(info);
             }
         }
 
@@ -145,31 +167,17 @@ public class WiFiNetwork extends Thread{
                 socket.connect(new InetSocketAddress(hostAddress, PORT), 5000);
                 transfer = new Transfer(socket);
                 transfer.start();
-            } catch (IOException e) {
+                synchronized (missionInitWait){
+                    while(mission == null){
+                        missionInitWait.wait();
+                    }
+
+                }
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
-
-
-
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            if(msg.what == SENT_INFO){
-                String info = (String) msg.obj;
-                sendInfoUp(info);
-            } else{
-                sendIdToEngine(msg.what);
-            }
-            return false;
-        }
-
-        private void sendInfoUp(String info) {
-            mission = GSON.fromJson(info, Mission.class);
-        }
-    });
 
 
     class Transfer extends Thread {
@@ -190,17 +198,16 @@ public class WiFiNetwork extends Thread{
 
         @Override
         public void run() {
+            Log.i("Kypcop1337", "TransferInit");
             while (socket != null) {
                 try {
                     if(receiveString() == null){
-                        int value = dataInputStream.readInt();
-                        handler.obtainMessage(value).sendToTarget();
+                        int id = dataInputStream.readInt();
+                        sendIdToEngine(id);
                     } else{
                         String info = receiveString();
-                        synchronized (mission){
-                            mission = GSON.fromJson(info, Mission.class);
-                            mission.notifyAll();
-                        }
+                        mission = GSON.fromJson(info, Mission.class);
+                        missionInitWait.notifyAll();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -218,20 +225,16 @@ public class WiFiNetwork extends Thread{
 
         void sendString(String string){
             try {
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
-                out.write(string);
-                out.close();
+                dataOutputStream.writeUTF(string);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
         String receiveString(){
+            Log.i("Kypcop1337", "receiveString");
             try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
-                String string = in.readLine();
-                in.close();
-                return string;
+                return dataInputStream.readUTF();
             } catch (IOException e) {
                 e.printStackTrace();
             }

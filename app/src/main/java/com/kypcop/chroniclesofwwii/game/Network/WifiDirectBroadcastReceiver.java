@@ -27,6 +27,7 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
     ConnectActivity activity;
     List<WifiP2pDevice> peers = new ArrayList<>();
 
+
     public WifiDirectBroadcastReceiver
             (WifiP2pManager manager, Channel channel, ConnectActivity activity) {
         this.manager = manager;
