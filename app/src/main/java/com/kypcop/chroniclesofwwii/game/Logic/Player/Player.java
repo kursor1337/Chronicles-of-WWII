@@ -7,7 +7,7 @@ public class Player {
     public static final int FIRST = 601;
     public static final int SECOND = 602;
 
-    private final int playerId;
+    protected final int playerId;
     private Nation nation;
     private int infantry;
     private int armored;
@@ -22,9 +22,6 @@ public class Player {
 
     }
 
-    public int getNumber() {
-        return playerId;
-    }
 
     public Nation getNation() {
         return nation;

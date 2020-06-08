@@ -19,6 +19,15 @@ public class AllMissions {
 
     public static final List<Mission> missionList = new ArrayList<>();
     private static int size = 0;
+    public static final int DEFAULT_MISSION_ID = Integer.MAX_VALUE;
+    public static final String DEFAULT_MISSION_NAME = "Default";
+
+    private static final Mission DEFAULT_MISSION = new Mission
+            (DEFAULT_MISSION_ID, DEFAULT_MISSION_NAME, Intros.DEFAULT_INTRO,
+            BRITAIN, 6, 6, 6,
+            BRITAIN, 6, 6, 6);
+
+
 
     public static List<Mission> createMissions(Context context){
         createNewMission(MissionNames.get(size), Intros.get(size),
@@ -55,4 +64,7 @@ public class AllMissions {
         return size;
     }
 
+    public static Mission getDefaultMission(){
+        return DEFAULT_MISSION;
+    }
 }

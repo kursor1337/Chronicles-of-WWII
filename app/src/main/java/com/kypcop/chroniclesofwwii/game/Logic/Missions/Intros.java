@@ -4,6 +4,8 @@ import java.util.TreeMap;
 
 public class Intros {
 
+    public static final String DEFAULT_INTRO = "Этот сценарий поможет узнать ваши чистые способности, без лишних факторов";
+
     public static TreeMap<Integer, String> INTROS = new TreeMap<>();
 
     static{

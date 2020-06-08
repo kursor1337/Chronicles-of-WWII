@@ -136,21 +136,23 @@ public class HUD {
             textView.setTextSize(30);
             switch (type){
                 case INFANTRY:
+                    button.setText("Пехота");
                     for(int i = 0; i < quantity; i++){
                         divisionStack.add(new InfantryDivision(i, player)); }
                     break;
                 case ARMORED:
+                    button.setText("Танки");
                     for(int i = 0; i < quantity; i++){
                         divisionStack.add(new ArmoredDivision(i, player)); }
                     break;
                 case ARTILLERY:
+                    button.setText("Артиллерия");
                     for(int i = 0; i < quantity; i++){
                         divisionStack.add(new ArtilleryDivision(i, player)); }
                     break;
                 default:
                     return;
             }
-            button.setText(Type.toString(type));
             update();
         }
 

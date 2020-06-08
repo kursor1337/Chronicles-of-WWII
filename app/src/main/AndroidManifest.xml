@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".game.Screen.LaunchMenuScreen"
+        <activity android:name=".game.Screen.LaunchMenuActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
 
@@ -28,21 +28,27 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".game.Screen.MissionMenuScreen"
+        <activity android:name=".game.Screen.MissionMenuActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-
-        <activity android:name=".game.Screen.GameScreen"
+        <activity android:name=".game.Screen.GameActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-
         <activity android:name=".game.Screen.CreateScenarioActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-
         <activity android:name=".game.Network.ConnectActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".game.Screen.ClientGameActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".game.Screen.ServerGameActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".game.Screen.SingleGameActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
     </application>
 
 </manifest>

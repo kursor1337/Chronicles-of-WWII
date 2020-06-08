@@ -14,19 +14,18 @@ import com.kypcop.chroniclesofwwii.game.Logic.Divisions.Division;
 import com.kypcop.chroniclesofwwii.game.Logic.Missions.Mission;
 import com.kypcop.chroniclesofwwii.game.Logic.Player.Player;
 import com.kypcop.chroniclesofwwii.game.Network.WiFiNetwork;
-import com.kypcop.chroniclesofwwii.game.Screen.GameScreen;
+import com.kypcop.chroniclesofwwii.game.Screen.GameActivity;
 import com.kypcop.chroniclesofwwii.game.Screen.HUD;
 
 public class Engine {
 
     public static final WiFiNetwork NETWORK = new WiFiNetwork();
 
-    public static final int IS_SERVER = 712;
-    public static final int IS_CLIENT = 713;
     public static final int SINGLE_PLAYER = 1714;
     public static final int MULTI_PLAYER = 1715;
     public static final String MODE = "mode";
-    public static final String ROLE = "role";
+    public static final String MISSION_ID = "mission";
+
 
     private static int turn = 0;
     private Division chosenDivision;
@@ -69,7 +68,7 @@ public class Engine {
             return;
         }
         if(board.tiles[i][j].isOccupied()){
-            if(!rightOwnership(turn, board.tiles[i][j].getDivision()) && chosenDivision == null){
+            if(!rightOwnership(board.tiles[i][j].getDivision()) && chosenDivision == null){
                 showText("Не ваш ход");
             }
             if(isPickingMove(id)){
@@ -86,9 +85,9 @@ public class Engine {
     private Player player1;
     private Player player2;
     private Mission mission;
-    private GameScreen gameScreen;
+    private GameActivity gameScreen;
 
-    public Engine(GameScreen gameScreen, HUD hud){
+    public Engine(GameActivity gameScreen, HUD hud){
         this.gameScreen = gameScreen;
         this.hud = hud;
         mission = hud.getMission();
@@ -100,21 +99,23 @@ public class Engine {
 
     /**
      *
-     * @param turn (number of turn)
+     *
      * @param division (division on a tile which's button was clicked)
      * @return true if it's right ownership / false if not
      */
-    private boolean rightOwnership(int turn, Division division){
+    private boolean rightOwnership(Division division){
         if(division == null){
             return false;
         }
-        if(turn % 2 == 0 && division.getAttachment() == player2){
-            return true;
-        }
-        if(turn % 2 == 1 && division.getAttachment() == player1){
-            return true;
-        }
-        return false;
+        return isMyDivision(division) || isEnemyDivision(division);
+    }
+
+    private boolean isMyDivision(Division division){
+        return turn % 2 == 0 && division.getAttachment() == player2;
+    }
+
+    private boolean isEnemyDivision(Division division){
+        return turn % 2 == 1 && division.getAttachment() == player1;
     }
 
 
@@ -133,11 +134,11 @@ public class Engine {
     private boolean isMotionMove(int id){
         if(tile[0] == null) return false;
         int i = id / 10, j = id % 10;
-        return !rightOwnership(turn, board.tiles[i][j].getDivision()) && chosenDivision != null;
+        return !isMyDivision(board.tiles[i][j].getDivision()) && chosenDivision != null;
     }
     private boolean isPickingMove(int id){
         int i = id /10, j = id % 10;
-        return rightOwnership(turn, board.tiles[i][j].getDivision());
+        return isMyDivision(board.tiles[i][j].getDivision());
     }
     private boolean isSettingMove(int id){
         int i = id / 10, j = id % 10;
@@ -219,7 +220,6 @@ public class Engine {
     }
 
     private void nextTurn(){
-        board.disableEnemyButtons(player1);
         turn++;
         if(player1.lost()){
             showText("Вы победили!");
@@ -239,7 +239,15 @@ public class Engine {
         handleAction(id);
     }
 
-    public GameScreen getGameScreen() {
+    public GameActivity getGameScreen() {
         return gameScreen;
+    }
+
+    public Board getBoard(){
+        return board;
+    }
+
+    public HUD getHud() {
+        return hud;
     }
 }

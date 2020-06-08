@@ -15,47 +15,49 @@ import com.kypcop.chroniclesofwwii.game.Logic.Missions.Mission;
 import java.util.List;
 
 
-public class MissionMenuScreen extends Activity implements View.OnClickListener {
+public class MissionMenuActivity extends Activity implements View.OnClickListener {
     List<Mission> missions;
     LinearLayout layout;
     LinearLayout.LayoutParams params;
     int mode;
     int role;
+    private static boolean missionsShown = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_missions);
 
         mode = getIntent().getIntExtra(Engine.MODE, Engine.SINGLE_PLAYER);
-        if(mode == Engine.MULTI_PLAYER){
-            role = getIntent().getIntExtra(Engine.ROLE, Engine.IS_SERVER);
-        }
 
         missions = AllMissions.createMissions(this);
         layout = findViewById(R.id.layout);
         params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         //setting buttons on the missions
-        for(int i = 0; i < AllMissions.quantity(); i++){
-            Button button = new Button(this);
-            button.setText(missions.get(i).getMissionName());
-            button.setLayoutParams(params);
-            button.setId(missions.get(i).getId());
-            layout.addView(button);
-            button.setOnClickListener(this);
+        if(!missionsShown) {
+            for (int i = 0; i < AllMissions.quantity(); i++) {
+                Button button = new Button(this);
+                button.setText(missions.get(i).getMissionName());
+                button.setLayoutParams(params);
+                button.setId(missions.get(i).getId());
+                layout.addView(button);
+                button.setOnClickListener(this);
+            }
         }
+        missionsShown = true;
 
-        //setting click listeners
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        Intent intent = new Intent(MissionMenuScreen.this, GameScreen.class);
-        intent.putExtra("mission", id);
-        intent.putExtra(Engine.MODE, mode);
+        Intent intent = new Intent(MissionMenuActivity.this, GameActivity.class);
+        intent.putExtra(Engine.MISSION_ID, id);
         if(mode == Engine.MULTI_PLAYER){
-            intent.putExtra(Engine.ROLE, role);
+            intent = new Intent(MissionMenuActivity.this, ServerGameActivity.class);
+        } else{
+            intent = new Intent(MissionMenuActivity.this, SingleGameActivity.class);
         }
         startActivity(intent);
     }

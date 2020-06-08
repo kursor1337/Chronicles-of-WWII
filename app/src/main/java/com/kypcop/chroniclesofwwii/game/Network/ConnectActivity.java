@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.kypcop.chroniclesofwwii.R;
 import com.kypcop.chroniclesofwwii.game.Engine;
-import com.kypcop.chroniclesofwwii.game.Screen.GameScreen;
+import com.kypcop.chroniclesofwwii.game.Screen.ClientGameActivity;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -47,7 +47,6 @@ public class ConnectActivity extends Activity {
     ListView listView;
     boolean isWifiP2pEnabled;
     TextView status;
-    WiFiNetwork network = Engine.NETWORK;
 
     final WifiP2pManager.PeerListListener peerListListener = new WifiP2pManager.PeerListListener() {
         @Override
@@ -142,9 +141,8 @@ public class ConnectActivity extends Activity {
             if(info.groupFormed){
                 Gson gson = new Gson();
                 String inetAddress = gson.toJson(hostAddress);
-                Intent intent = new Intent(ConnectActivity.this, GameScreen.class);
-                intent.putExtra(Engine.MODE, Engine.MULTI_PLAYER).putExtra(Engine.ROLE, Engine.IS_CLIENT).
-                        putExtra(WiFiNetwork.HOST_ADDRESS, inetAddress);
+                Intent intent = new Intent(ConnectActivity.this, ClientGameActivity.class);
+                intent.putExtra(Engine.MODE, Engine.MULTI_PLAYER).putExtra(WiFiNetwork.HOST_ADDRESS, inetAddress);
                 startActivity(intent);
                 Toast.makeText(ConnectActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }

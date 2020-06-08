@@ -24,14 +24,11 @@ import com.kypcop.chroniclesofwwii.game.Network.ConnectActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.kypcop.chroniclesofwwii.game.Engine.IS_CLIENT;
-import static com.kypcop.chroniclesofwwii.game.Engine.IS_SERVER;
 import static com.kypcop.chroniclesofwwii.game.Engine.MODE;
 import static com.kypcop.chroniclesofwwii.game.Engine.MULTI_PLAYER;
-import static com.kypcop.chroniclesofwwii.game.Engine.ROLE;
 import static com.kypcop.chroniclesofwwii.game.Engine.SINGLE_PLAYER;
 
-public class LaunchMenuScreen extends Activity {
+public class LaunchMenuActivity extends Activity {
     Button start, server, connect, new_scenario; //main menu with some buttons
     private LocationManager locationManager;
     private WifiManager wifiManager;
@@ -55,7 +52,7 @@ public class LaunchMenuScreen extends Activity {
          start.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 Intent intent = new Intent(LaunchMenuScreen.this, MissionMenuScreen.class);
+                 Intent intent = new Intent(LaunchMenuActivity.this, MissionMenuActivity.class);
                  intent.putExtra(MODE, SINGLE_PLAYER);
                  startActivity(intent);
              }
@@ -70,11 +67,11 @@ public class LaunchMenuScreen extends Activity {
                     requestLocationPermission();
 
                     if(isLocationPermissionGranted() &&  wifiManager.isWifiEnabled()){
-                        Intent intent = new Intent(LaunchMenuScreen.this, MissionMenuScreen.class);
-                        intent.putExtra(MODE, MULTI_PLAYER).putExtra(ROLE, IS_SERVER);
+                        Intent intent = new Intent(LaunchMenuActivity.this, MissionMenuActivity.class);
+                        intent.putExtra(MODE, MULTI_PLAYER);
                         startActivity(intent);
                     } else if(!wifiManager.isWifiEnabled()){
-                        Toast.makeText(LaunchMenuScreen.this, "Не удалось включить Wi-Fi :(", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LaunchMenuActivity.this, "Не удалось включить Wi-Fi :(", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -89,11 +86,10 @@ public class LaunchMenuScreen extends Activity {
                     requestLocationPermission();
 
                     if(isLocationPermissionGranted() && wifiManager.isWifiEnabled()){
-                        Intent intent = new Intent(LaunchMenuScreen.this, ConnectActivity.class);
-                        intent.putExtra(MODE, MULTI_PLAYER).putExtra(ROLE, IS_CLIENT);
+                        Intent intent = new Intent(LaunchMenuActivity.this, ConnectActivity.class);
                         startActivity(intent);
                     } else if(!wifiManager.isWifiEnabled()){
-                        Toast.makeText(LaunchMenuScreen.this, "Не удалось включить Wi-Fi :(", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LaunchMenuActivity.this, "Не удалось включить Wi-Fi :(", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -148,7 +144,7 @@ public class LaunchMenuScreen extends Activity {
         }
         if(requestCode == 101){
             if(!grantResultsList.contains(PackageManager.PERMISSION_DENIED)){
-                Intent intent = new Intent(LaunchMenuScreen.this, ConnectActivity.class);
+                Intent intent = new Intent(LaunchMenuActivity.this, ConnectActivity.class);
                 startActivity(intent);
             }
         }

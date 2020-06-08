@@ -4,7 +4,6 @@ package com.kypcop.chroniclesofwwii.game.Logic.Board;
 import android.content.Context;
 
 import com.kypcop.chroniclesofwwii.game.Engine;
-import com.kypcop.chroniclesofwwii.game.Logic.Player.Player;
 
 import java.util.List;
 
@@ -37,25 +36,6 @@ public class Board {
     }
 
 
-    /**
-     * disables buttons which are occupied by enemy and enables player's
-     * @param enemy
-     */
-    public void disableEnemyButtons(Player enemy){
-        for(Tile[] row: tiles){
-            for(Tile tile: row){
-                if(tile.isOccupied()){
-                    if(tile.getDivision().getAttachment() == enemy){
-                        tile.getButton().setEnabled(false);
-                    } else{
-                        tile.getButton().setEnabled(true);
-                    }
-                } else{
-                    tile.getButton().setEnabled(true);
-                }
-            }
-        }
-    }
 
     public int getSize() {
         return size;

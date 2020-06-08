@@ -6,7 +6,8 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.kypcop.chroniclesofwwii.game.Engine;
 import com.kypcop.chroniclesofwwii.game.Logic.Missions.Mission;
-import com.kypcop.chroniclesofwwii.game.Screen.GameScreen;
+import com.kypcop.chroniclesofwwii.game.Screen.ClientGameActivity;
+import com.kypcop.chroniclesofwwii.game.Screen.GameActivity;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -31,7 +32,7 @@ public class WiFiNetwork extends Thread{
     private Engine engine;
     private volatile Mission mission;
 
-    private GameScreen gameScreen;
+    private GameActivity gameScreen;
 
 
 
@@ -42,7 +43,7 @@ public class WiFiNetwork extends Thread{
         this.gameScreen = engine.getGameScreen();
     }
 
-    public void connectScreenToNetwork(GameScreen gameScreen){
+    public void connectScreenToNetwork(GameActivity gameScreen){
         this.gameScreen = gameScreen;
     }
 
@@ -72,7 +73,7 @@ public class WiFiNetwork extends Thread{
         Log.i("Kypcop1337", "clientInitialized");
     }
 
-    public void sendMissionInfoToGameScreen(GameScreen gameScreen){
+    public void sendMissionInfoToClientGameActivity(ClientGameActivity gameActivity){
         Log.i("Kypcop1337", "DickBig");
         synchronized(missionInitWait){
             while(mission == null){
@@ -84,7 +85,7 @@ public class WiFiNetwork extends Thread{
             }
             Log.i("Kypcop1337", "DickBig2");
             notifyAll();
-            gameScreen.receiveMissionInfo(mission);
+            gameActivity.receiveMissionInfo(mission);
         }
     }
 
@@ -126,6 +127,7 @@ public class WiFiNetwork extends Thread{
             try {
                 serverSocket = new ServerSocket(PORT);
                 socket = serverSocket.accept();
+                Log.i("Kypcop1337", "Client accepted CykaBlyat");
                 handler.obtainMessage(1);
                 transfer = new Transfer(socket);
                 transfer.start();
