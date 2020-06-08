@@ -45,20 +45,19 @@ public class MissionMenuActivity extends Activity implements View.OnClickListene
                 button.setOnClickListener(this);
             }
         }
-        missionsShown = true;
 
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        Intent intent = new Intent(MissionMenuActivity.this, GameActivity.class);
-        intent.putExtra(Engine.MISSION_ID, id);
+        Intent intent;
         if(mode == Engine.MULTI_PLAYER){
             intent = new Intent(MissionMenuActivity.this, ServerGameActivity.class);
         } else{
             intent = new Intent(MissionMenuActivity.this, SingleGameActivity.class);
         }
+        intent.putExtra(Engine.MISSION_ID, id);
         startActivity(intent);
     }
 }

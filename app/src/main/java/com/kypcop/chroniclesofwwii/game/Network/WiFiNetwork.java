@@ -127,7 +127,7 @@ public class WiFiNetwork extends Thread{
             try {
                 serverSocket = new ServerSocket(PORT);
                 socket = serverSocket.accept();
-                Log.i("Kypcop1337", "Client accepted CykaBlyat");
+                Log.i("Kypcop1337", "Client accepted");
                 handler.obtainMessage(1);
                 transfer = new Transfer(socket);
                 transfer.start();
@@ -187,6 +187,7 @@ public class WiFiNetwork extends Thread{
         DataInputStream dataInputStream;
         DataOutputStream dataOutputStream;
         Socket socket;
+        Object stringReceived = new Object();
 
         Transfer(Socket socket){
             this.socket = socket;
@@ -204,9 +205,11 @@ public class WiFiNetwork extends Thread{
             while (socket != null) {
                 try {
                     if(receiveString() == null){
+                        Log.i("Kypcop1337", "receiveString() == null, sent id");
                         int id = dataInputStream.readInt();
                         sendIdToEngine(id);
                     } else{
+                        Log.i("Kypcop1337", "receiveString() worked, vse norm");
                         String info = receiveString();
                         mission = GSON.fromJson(info, Mission.class);
                         missionInitWait.notifyAll();
@@ -236,6 +239,7 @@ public class WiFiNetwork extends Thread{
         String receiveString(){
             Log.i("Kypcop1337", "receiveString");
             try {
+                dataInputStream.readUTF();
                 return dataInputStream.readUTF();
             } catch (IOException e) {
                 e.printStackTrace();
