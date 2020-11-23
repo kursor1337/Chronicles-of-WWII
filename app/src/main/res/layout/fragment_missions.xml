@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layout">
+
+     <ListView
+         android:id="@+id/mission_list"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:textColor="@color/colorWhite"
+         android:padding="2dp"
+         android:divider="@android:color/transparent"
+         android:dividerHeight="2dp">
+     </ListView>
+
+     <Button
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="@string/default_mission"
+         android:id="@+id/default_mission"
+         android:background="@drawable/drawable_button"
+         >
+     </Button>
+     <Button
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="@string/custom"
+         android:id="@+id/custom_mission"
+         android:background="@drawable/drawable_button"
+         >
+     </Button>
+
+</LinearLayout>

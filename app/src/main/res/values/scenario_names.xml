@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--mission names-->
+    <string-array name="missions">
+        <item>SeaLion</item>                    <!--0-->
+        <item>Ardenne Operation 1940</item>     <!--1-->
+        <item>Operation Barbarossa</item>       <!--2-->
+        <item>Battle of Midway</item>           <!--3-->
+        <item>Sicilian Invasion</item>          <!--4-->
+        <item>Day D</item>                      <!--5-->
+    </string-array>
+
+</resources>

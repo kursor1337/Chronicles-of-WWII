@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--mission names-->
+    <string-array name="missions">
+        <item>Морской Лев</item>                    <!--0-->
+        <item>Арденнская Операция 1940</item>       <!--1-->
+        <item>План Барбаросса</item>                <!--2-->
+        <item>Битва за Мидвей</item>                <!--3-->
+        <item>Высадка в Сицилии</item>              <!--4-->
+        <item>Высадка в Нормандии</item>            <!--5-->
+    </string-array>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/startText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/connect"
+        android:text="@string/welcome"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="#ffffff"/>
+
+    <Button
+        android:id="@+id/server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/host" />
+
+    <Button
+        android:id="@+id/connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/server"
+        android:text="@string/join" />
+
+    <Button
+        android:id="@+id/overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/server"
+        android:layout_marginTop="0dp"
+        android:text="@string/overview">
+
+    </Button>
+
+    <Button
+        android:id="@+id/game_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/overview"
+        android:layout_marginTop="0dp"
+        android:text="Game Activity">
+
+    </Button>
+
+</RelativeLayout>

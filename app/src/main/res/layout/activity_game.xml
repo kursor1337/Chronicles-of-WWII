@@ -3,36 +3,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/hud1"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TableLayout
-            android:id="@+id/table"
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            app:layout_constraintDimensionRatio="1"
-            tools:ignore="MissingConstraints">
-        </TableLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/hud2"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_gravity="bottom">
+        android:orientation="horizontal">
+        <Button
+            android:text="@string/infantry"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/infantry_button_enemy"
+            android:alpha="0.8">
+        </Button>
+        <Button
+            android:text="@string/armored"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/armored_button_enemy"
+            android:alpha="0.8"
+            >
+        </Button>
+        <Button
+            android:text="@string/artillery"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/artillery_button_enemy"
+            android:alpha="0.8">
+        </Button>
+    </LinearLayout>
+
+    <com.kaushikthedeveloper.squarelayout.SquareTableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/table">
+
+    </com.kaushikthedeveloper.squarelayout.SquareTableLayout>
+    <LinearLayout
+        android:id="@+id/hud2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+        <Button
+            android:text="@string/infantry"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/infantry_button_me"
+            android:alpha="0.8">
+        </Button>
+        <Button
+            android:text="@string/armored"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/armored_button_me"
+            android:alpha="0.8">
+        </Button>
+        <Button
+            android:text="@string/artillery"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/artillery_button_me"
+            android:alpha="0.8">
+        </Button>
     </LinearLayout>
 
 </LinearLayout>

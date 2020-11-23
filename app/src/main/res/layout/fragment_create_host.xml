@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chooseHostName"
+        android:textAlignment="center"
+        android:text="@string/set_host_parameters">
+    </TextView>
+
+    <EditText
+        android:paddingVertical="6dp"
+        android:background="@drawable/drawable_button"
+        android:textSize="22sp"
+        android:id="@+id/host_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/choose_host_name"
+        android:textAlignment="center"
+        android:lines="1">
+    </EditText>
+
+
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:text="@string/choose_mission"
+        android:textAlignment="center">
+
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:id="@+id/chosen_mission"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:text="Not chosen">
+        </TextView>
+
+
+        <Button
+            android:text="@string/choose_mission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/choose_mission_button"
+            android:background="@drawable/drawable_button">
+        </Button>
+
+    </LinearLayout>
+
+    <Button
+        android:background="@drawable/drawable_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hostReady"
+        android:id="@+id/ready">
+    </Button>
+
+
+</LinearLayout>

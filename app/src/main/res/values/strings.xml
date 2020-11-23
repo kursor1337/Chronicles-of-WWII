@@ -1,11 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Chronicles of WWII</string>
-    <string name="mission0">Морской Лев</string>
-    <string name="mission1">Арденнская Операция 1940</string>
-    <string name="mission2">План Барбаросса</string>
-    <string name="mission3">Битва за Мидвей</string>
-    <string name="mission4">Высадка в Сицилии</string>
-    <string name="mission5">Высадка в Нормандии</string>
+    <string name="add">Add</string>
+    <string name="prep">Prepared</string>
+    <string name="custom">Custom</string>
+    <string name="welcome">Welcome!</string>
+    <string name="start_campaign">Campaign</string>
+    <string name="host">Make Host</string>
+    <string name="join">Join game</string>
+    <string name="new_scenario">Create new scenario</string>
+    <string name="show_mission_list">List of Missions</string>
+    <string name="choose_mission">Choose Mission</string>
+    <string name="scenario_title">Title of the scanario</string>
+    <string name="scenario_intro">Intro to the scenario</string>
+    <string name="enemies">Enemies</string>
+    <string name="infantry">Infantry</string>
+    <string name="armored">Armored</string>
+    <string name="artillery">Artillery</string>
+    <string name="done">Done</string>
+    <string name="load_game">Load game</string>
+    <string name="waiting_for_accepted">Waiting for host to accept</string>
+    <string name="cancel_request_for_accepted">Cancel request</string>
+    <string name="choose_host_name">Type in host name</string>
+    <string name="set_host_parameters">Set host parameters</string>
+    <string name="default_mission">Play default mission</string>
+    <string name="hostReady">Ready</string>
+    <string name="overview">Overview</string>
+    <string name="ipAddress">IP-Address: $</string>
+    <string name="port">Port: </string>
+    <string name="connect">Connect</string>
+    <string name="clientName">Your name</string>
 
 
 </resources>

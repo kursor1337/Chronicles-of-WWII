@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Хроники Второй Мировой</string>
+    <string name="add">Добавить</string>
+    <string name="prep">Готовые</string>
+    <string name="custom">Добавленные</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="start_campaign">Кампания</string>
+    <string name="host">Создать сервер</string>
+    <string name="join">Присоединиться</string>
+    <string name="new_scenario">Создать новый сценарий</string>
+    <string name="show_mission_list">Список миссий</string>
+    <string name="choose_mission">Выберите миссию</string>
+    <string name="scenario_title">Название сценария</string>
+    <string name="scenario_intro">Интро к сценарию</string>
+    <string name="enemies">Противники</string>
+    <string name="infantry">Пехота</string>
+    <string name="armored">Танки</string>
+    <string name="artillery">Артиллерия</string>
+    <string name="done">Готово</string>
+    <string name="load_game">Загрузить игру</string>
+    <string name="waiting_for_accepted">Выполняется запрос на подключение</string>
+    <string name="choose_host_name">Выберите имя сервера</string>
+    <string name="set_host_parameters">Настройте параметры сервера</string>
+    <string name="cancel_request_for_accepted">Отменить запрос</string>
+    <string name="default_mission">Дефолтная миссия</string>
+    <string name="hostReady">Готово</string>
+    <string name="overview">Обзор</string>
+    <string name="ipAddress">"IP-Адрес: "</string>
+    <string name="port">"Порт: "</string>
+    <string name="connect">Присоединиться</string>
+    <string name="clientName">Ваш ник</string>
+
+
+</resources>
