@@ -28,24 +28,4 @@
         android:layout_above="@+id/server"
         android:text="@string/join" />
 
-    <Button
-        android:id="@+id/overview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/server"
-        android:layout_marginTop="0dp"
-        android:text="@string/overview">
-
-    </Button>
-
-    <Button
-        android:id="@+id/game_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/overview"
-        android:layout_marginTop="0dp"
-        android:text="Game Activity">
-
-    </Button>
-
 </RelativeLayout>

@@ -1,7 +1,6 @@
 package com.kypcop.chroniclesofwwii.game.screen.fragments.menuFragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,21 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.kypcop.chroniclesofwwii.R;
-import com.kypcop.chroniclesofwwii.game.logic.missions.AllMissions;
-import com.kypcop.chroniclesofwwii.game.logic.missions.Mission;
-import com.kypcop.chroniclesofwwii.game.screen.activities.GameActivity;
 import com.kypcop.chroniclesofwwii.game.screen.activities.MenuActivity;
-
-import static com.kypcop.chroniclesofwwii.game.Const.connection.HOST;
-import static com.kypcop.chroniclesofwwii.game.Const.game.MISSION;
-import static com.kypcop.chroniclesofwwii.game.Const.game.MULTIPLAYER_GAME_MODE;
 
 public class LaunchFragment extends Fragment {
 
     Button makeHost;
     Button joinGame;
-    Button overView;
-    Button gameActivity;
 
     MenuActivity menuActivity;
 
@@ -49,19 +39,6 @@ public class LaunchFragment extends Fragment {
 
         makeHost = view.findViewById(R.id.server);
         joinGame = view.findViewById(R.id.connect);
-        gameActivity = view.findViewById(R.id.game_activity);
-        overView = view.findViewById(R.id.overview);
-
-        overView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //menuActivity.changeFragment(new OverviewFragment(), true, false);
-
-                menuActivity.changeFragment(new MissionFragment(), true, false);
-
-            }
-        });
-
         makeHost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,15 +62,6 @@ public class LaunchFragment extends Fragment {
                 }
 
                 menuActivity.changeFragment(new JoinGameFragment(), true, false);
-            }
-        });
-        gameActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), GameActivity.class)
-                        .putExtra(MULTIPLAYER_GAME_MODE, HOST)
-                        .putExtra(MISSION, Mission.toJson(AllMissions.getDefaultMission()));
-                startActivity(intent);
             }
         });
         return view;

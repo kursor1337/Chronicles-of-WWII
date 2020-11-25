@@ -18,7 +18,6 @@ import com.kypcop.chroniclesofwwii.game.screen.fragments.SimpleDialogFragment;
 import com.kypcop.chroniclesofwwii.game.screen.fragments.menuFragments.CreateHostFragment;
 import com.kypcop.chroniclesofwwii.game.screen.fragments.menuFragments.JoinGameFragment;
 import com.kypcop.chroniclesofwwii.game.screen.fragments.menuFragments.LaunchFragment;
-import com.kypcop.chroniclesofwwii.game.screen.fragments.menuFragments.OverviewFragment;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -70,8 +69,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(getSupportFragmentManager().findFragmentByTag(CreateHostFragment.class.getName()) != null ||
-                getSupportFragmentManager().findFragmentByTag(JoinGameFragment.class.getName()) != null ||
-                getSupportFragmentManager().findFragmentByTag(OverviewFragment.class.getName()) != null) super.onBackPressed();
+                getSupportFragmentManager().findFragmentByTag(JoinGameFragment.class.getName()) != null) super.onBackPressed();
         else buildMessageQuit();
     }
 
