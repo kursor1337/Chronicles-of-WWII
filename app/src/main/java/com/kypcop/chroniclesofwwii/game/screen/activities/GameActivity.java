@@ -67,11 +67,9 @@ public class GameActivity extends AppCompatActivity{
             Log.i(TAG, tileView.getTile() + "");
             if(isMotionMoveNow(tileView)){
                 motionMove(tileView);
-            }
-            if(isAddMoveNow(tileView)){
+            } else if(isAddMoveNow(tileView)){
                 addMove(tileView);
-            }
-            if(isPickingClickNow(tileView)){
+            } else if(isPickingClickNow(tileView)){
                 pickingClick(tileView);
             }
 
@@ -116,10 +114,10 @@ public class GameActivity extends AppCompatActivity{
     EventListener eventListener = new EventListener() {
         @Override
         public void onMyMoveComplete(Move move) {
-            boardLayout.hideLegalMoves();
             Log.i("EventListener", "onMyMoveComplete");
             connection.send(move.toCode());
             disableScreen();
+            boardLayout.hideLegalMoves();
         }
 
         @Override
@@ -334,6 +332,8 @@ public class GameActivity extends AppCompatActivity{
         Move move = new Move(chosenControl, tileV.getTile());
         engine.handleMyMove(move);
         previousMoveType = ADDING_MOVE;
+        chosenControl = null;
+
     }
 
     protected void pickingClick(TileView tileV){

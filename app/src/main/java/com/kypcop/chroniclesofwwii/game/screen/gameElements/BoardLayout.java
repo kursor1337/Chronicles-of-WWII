@@ -93,10 +93,12 @@ public class BoardLayout {
     }
 
     public void hideLegalMoves(){
-        for(TileView tileView: shownTileViews){
-            tileView.hideIsLegal();
+        for(int i = 0; i < tileViews.length; i++){
+            for(int j = 0; j < tileViews.length; j++){
+                tileViews[i][j].hideIsLegal();
+            }
         }
-        shownTileViews.clear();
+
         movesShown = false;
     }
 

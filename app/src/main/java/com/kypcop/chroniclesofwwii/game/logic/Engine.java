@@ -3,6 +3,7 @@ package com.kypcop.chroniclesofwwii.game.logic;
 import android.content.res.Resources;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.kypcop.chroniclesofwwii.game.Const;
 import com.kypcop.chroniclesofwwii.game.logic.board.AddMove;
 import com.kypcop.chroniclesofwwii.game.logic.board.Board;
@@ -98,7 +99,8 @@ public class Engine {
 
     public void handleEnemyMotionMove(MotionMove move) {
         Log.i(TAG, "Handle enemy motion move");
-        Division division = move.getDestination().getDivision();
+        Log.i("Engine", new Gson().toJson(move));
+        Division division = move.getStart().getDivision();
         if(division.isValidMove(move)){
             division.move(move, board);
         } else{

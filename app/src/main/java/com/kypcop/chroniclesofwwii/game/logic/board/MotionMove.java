@@ -30,11 +30,6 @@ public class MotionMove{
 
     }
 
-    public MotionMove(int startCoordinate, int destCoordinate, @NotNull BoardLayout boardLayout){
-        this(startCoordinate, destCoordinate, boardLayout.getBoard());
-
-    }
-
     public Simplified simplify(){
         return new Simplified(start.getCoordinate(), destination.getCoordinate());
     }

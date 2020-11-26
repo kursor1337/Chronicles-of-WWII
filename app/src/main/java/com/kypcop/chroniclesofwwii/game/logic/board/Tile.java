@@ -50,6 +50,7 @@ public class Tile{
             this.division = division;
             changeListener.onDivisionChanged(this);
         }
+        division.setTileCoordinate(this);
     }
     public void clearTile(){
         Log.i("Tile", "clearTile");

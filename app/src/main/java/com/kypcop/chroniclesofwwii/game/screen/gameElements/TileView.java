@@ -92,7 +92,7 @@ public class TileView {
     }
 
     public void clearTileView(){
-        tile.clearTile();
+        if(tile.isOccupied()) tile.clearTile();
         imageView.setBackgroundResource(R.drawable.empty);
         setImage(R.drawable.empty);
     }
@@ -108,6 +108,7 @@ public class TileView {
         if(!tile.isOccupied()){
             addLayer(R.drawable.legal);
             state = STATE_LEGAL;
+            Log.i("TileView", "Show is legal");
         } else{
             showIsAttacked();
         }
@@ -116,6 +117,7 @@ public class TileView {
     private void showIsAttacked(){
         addLayer(R.drawable.attacked);
         state = STATE_ATTACKED;
+        Log.i("TileView", "Show is attacked");
     }
 
     public int getRow() {

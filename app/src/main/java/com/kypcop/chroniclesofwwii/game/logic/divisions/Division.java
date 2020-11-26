@@ -49,8 +49,8 @@ public class Division {
         if (move.getDestination().isOccupied()){
             attack(move.getDestination());
         } else{
-            move.getStart().setDivision(this);
-            move.getDestination().clearTile();
+            move.getDestination().setDivision(this);
+            move.getStart().clearTile();
         }
     }
 
