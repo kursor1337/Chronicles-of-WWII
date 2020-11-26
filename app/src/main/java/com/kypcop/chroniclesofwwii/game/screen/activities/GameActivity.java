@@ -289,6 +289,7 @@ public class GameActivity extends AppCompatActivity{
 
     protected boolean isMotionMoveNow(TileView tileV){
         if (selectedTileView == null || !selectedTileView.isOccupied()) return false;
+        if(selectedTileView == tileV) return false;
         if(selectedTileView.isOccupied()){
             if(tileV.getDivision() == null){
                 return true;
@@ -314,6 +315,7 @@ public class GameActivity extends AppCompatActivity{
             return false;
         }
         if (selectedTileView != null && selectedTileView.getDivision().getKeeper() == me) {
+            boardLayout.hideLegalMoves();
             return true;
         }
         return chosenControl == null;
