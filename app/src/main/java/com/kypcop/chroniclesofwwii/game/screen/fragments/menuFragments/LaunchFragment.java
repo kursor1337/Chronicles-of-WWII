@@ -45,7 +45,7 @@ public class LaunchFragment extends Fragment {
 
                 WifiManager wifiManager = menuActivity.getWifiManager();
                 if(!wifiManager.isWifiEnabled()){
-                    Toast.makeText(getActivity(), "Пожалуйства включите Wi-Fi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.turn_wifi, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 menuActivity.changeFragment(new CreateHostFragment(), true, false);
@@ -57,7 +57,7 @@ public class LaunchFragment extends Fragment {
 
                 WifiManager wifiManager = menuActivity.getWifiManager();
                 if(!wifiManager.isWifiEnabled()){
-                    Toast.makeText(getActivity(), "Пожалуйства включите Wi-Fi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.turn_wifi, Toast.LENGTH_SHORT).show();
                     return;
                 }
 

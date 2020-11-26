@@ -46,20 +46,6 @@ public class MissionFragment extends Fragment implements CreateNewScenarioFragme
         menuActivity = (MenuActivity) context;
     }
 
-    /*
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getParentFragmentManager().setFragmentResultListener(CUSTOM_MISSION_INFO, this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                getParentFragmentManager().setFragmentResult(CreateHostFragment.MISSION_INFO, result);
-            }
-        });
-    }
-
-     */
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -62,16 +62,19 @@ public class GameActivity extends AppCompatActivity{
     View.OnClickListener tileClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            TileView v = boardLayout.getTileViewByCoordinate(view.getId());
-            if(isMotionMoveNow(v)){
-                motionMove(v);
+            TileView tileView = boardLayout.getTileViewByCoordinate(view.getId());
+            Log.i(TAG, "" + view.getId());
+            Log.i(TAG, tileView.getTile() + "");
+            if(isMotionMoveNow(tileView)){
+                motionMove(tileView);
             }
-            if(isAddMoveNow(v)){
-                addMove(v);
+            if(isAddMoveNow(tileView)){
+                addMove(tileView);
             }
-            if(isPickingClickNow(v)){
-                pickingClick(v);
+            if(isPickingClickNow(tileView)){
+                pickingClick(tileView);
             }
+
         }
     };
 
@@ -320,7 +323,7 @@ public class GameActivity extends AppCompatActivity{
 
     protected void motionMove(TileView tileV){
         Log.i(TAG, "Motion move");
-        Move move = new Move(selectedTileView, tileV);
+        Move move = new Move(selectedTileView.getTile(), tileV.getTile());
         engine.handleMyMove(move);
         selectedTileView = null;
         previousMoveType = MOTION_MOVE;
@@ -328,7 +331,7 @@ public class GameActivity extends AppCompatActivity{
 
     protected void addMove(TileView tileV){
         Log.i(TAG, "Add move");
-        Move move = new Move(chosenControl, tileV);
+        Move move = new Move(chosenControl, tileV.getTile());
         engine.handleMyMove(move);
         previousMoveType = ADDING_MOVE;
     }

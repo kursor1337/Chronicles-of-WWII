@@ -125,7 +125,7 @@ public class Engine {
 
     private void handleMyAddMove(AddMove move){
         Log.i(TAG, "Handle my add move");
-        move.getDestination().setDivision(move.getStart().getOneDivision());
+        move.getDestination().setDivision(move.getAddingDivision());
         nextTurn();
     }
 

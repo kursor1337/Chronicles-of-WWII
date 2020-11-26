@@ -70,7 +70,7 @@ public class CreateHostFragment extends Fragment {
         }
         @Override
         public void onRegistrationFailed(@NotNull NsdServiceInfo arg0, int arg1) {
-            Toast.makeText(menuActivity, "Registration Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(menuActivity, R.string.registration_failed, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -115,7 +115,7 @@ public class CreateHostFragment extends Fragment {
     private final Server.Listener serverListener = new Server.Listener() {
         @Override
         public void onListeningStartError(@NotNull Exception e) {
-            Toast.makeText(menuActivity, "Error when start listening", Toast.LENGTH_SHORT).show();
+            Toast.makeText(menuActivity, R.string.error_start_listening, Toast.LENGTH_SHORT).show();
             ready.setEnabled(true);
         }
         @Override
@@ -226,7 +226,7 @@ public class CreateHostFragment extends Fragment {
                 })
                 .build();
         dialog.show(getParentFragmentManager(), "Waiting for Connected");
-        Toast.makeText(menuActivity, "Waiting for connected", Toast.LENGTH_SHORT).show();
+        Toast.makeText(menuActivity, R.string.waiting_for_connected, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -21,8 +21,7 @@ public class BoardLayout {
     private final TableLayout tableLayout;
     private final TileView[][] tileViews;
     private final GameActivity gameActivity;
-    private final List<TileView> shownPlates = new ArrayList<>();
-    private final List<TileView> foggedPlates = new ArrayList<>();
+    private final List<TileView> shownTileViews = new ArrayList<>();
     private boolean movesShown = false;
 
     public BoardLayout(@NotNull TableLayout layout, @NotNull GameActivity gameActivity, @NotNull Board board){
@@ -76,29 +75,28 @@ public class BoardLayout {
         for (MotionMove move : legalMotionMoves) {
             TileView tileView = move.getDestinationTilePlate(this);
             tileView.showIsLegal();
-            shownPlates.add(tileView);
+            shownTileViews.add(tileView);
         }
         movesShown = true;
     }
 
     public void showLegalMoves(Division division){
         showLegalMoves(division.calculateLegalMoves(board));
-        movesShown = true;
     }
 
     public void showLegalMoves(int row){
         for(TileView tileView : tileViews[row]){
-            shownPlates.add(tileView);
+            shownTileViews.add(tileView);
             tileView.showIsLegal();
             movesShown = true;
         }
     }
 
     public void hideLegalMoves(){
-        for(TileView shownPlate: shownPlates){
-            shownPlate.hideIsLegal();
+        for(TileView tileView: shownTileViews){
+            tileView.hideIsLegal();
         }
-        shownPlates.clear();
+        shownTileViews.clear();
         movesShown = false;
     }
 

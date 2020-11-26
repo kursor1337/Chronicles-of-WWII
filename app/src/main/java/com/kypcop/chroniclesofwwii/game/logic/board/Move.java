@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.kypcop.chroniclesofwwii.game.screen.gameElements.HUD;
-import com.kypcop.chroniclesofwwii.game.screen.gameElements.TileView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,16 +31,8 @@ public class Move {
         motionMove = null;
     }
 
-    public Move(@NotNull HUD.Control start, @NotNull TileView destination){
-        this(new AddMove(start, destination));
-    }
-
     public Move(@NotNull HUD.Control start, @NotNull Tile destination){
         this(new AddMove(start, destination));
-    }
-
-    public Move(@NotNull TileView start, @NotNull TileView destination){
-        this(new MotionMove(start, destination));
     }
 
     public Move(@NotNull Tile start, @NotNull Tile destination){

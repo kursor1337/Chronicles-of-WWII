@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -59,28 +60,35 @@ public class JoinGameFragment extends Fragment {
     HostsAdapter hostAdapter;
     Host host;
     TextView statusTextView;
+    EditText clientNameEditText;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_connect, new LinearLayout(menuActivity), false);
 
+        clientNameEditText = view.findViewById(R.id.client_name_edittext);
         nsdHelper = new NsdHelper(menuActivity, nsdListener);
         nsdHelper.startDiscovery();
         hostListView = view.findViewById(R.id.list_view);
         statusTextView = view.findViewById(R.id.status_text_view);
-        statusTextView.setText("Finding");
+        statusTextView.setText(R.string.finding);
 
         hostAdapter = new HostsAdapter(menuActivity, new ArrayList<Host>());
         hostListView.setAdapter(hostAdapter);
         hostListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                host = hostAdapter.getItem(position);
-                client.connectTo(host);
+                String string = clientNameEditText.getText().toString();
+                if(string.length() > 0){
+                    client = new Client(string, menuActivity, sendListener, receiveListener, clientListener);
+                    host = hostAdapter.getItem(position);
+                    client.connectTo(host);
+                } else{
+                    Toast.makeText(menuActivity, R.string.fill_the_gaps, Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        client = new Client("Fuck", menuActivity, sendListener, receiveListener, clientListener);
 
         return view;
     }
@@ -104,15 +112,15 @@ public class JoinGameFragment extends Fragment {
     private final NsdHelper.DiscoveryListener nsdListener = new NsdHelper.DiscoveryListener() {
         @Override
         public void onResolveFailed(int errorCode) {
-            Toast.makeText(menuActivity, "Resolve Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(menuActivity, R.string.resolve_failed, Toast.LENGTH_SHORT).show();
         }
         @Override
         public void onDiscoveryFailed(int errorCode) {
-            Toast.makeText(menuActivity, "Discovery Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(menuActivity, R.string.discovery_failed, Toast.LENGTH_SHORT).show();
         }
         @Override
         public void onHostFound(@NotNull Host host) {
-            statusTextView.setText("Found yay");
+            statusTextView.setText(R.string.found);
             hostMap.put(host.getName(), host);
             hostAdapter.clear();
             hostAdapter.addAll(hostMap.values());
@@ -126,7 +134,7 @@ public class JoinGameFragment extends Fragment {
             hostAdapter.notifyDataSetChanged();
             hostAdapter.notifyDataSetChanged();
             if(hostAdapter.getCount() == 0){
-                statusTextView.setText("No hosts found");
+                statusTextView.setText(R.string.not_found);
             }
         }
     };
@@ -150,7 +158,7 @@ public class JoinGameFragment extends Fragment {
                     buildMessageWaitingForAccepted();
                     break;
                 case REJECTED:
-                    Toast.makeText(menuActivity, "Connection refused", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(menuActivity, R.string.connection_refused, Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     Log.i("Client", "Default branch");
@@ -175,7 +183,7 @@ public class JoinGameFragment extends Fragment {
     private final Client.Listener clientListener = new Client.Listener() {
         @Override
         public void onException(@NotNull Exception e) {
-            Toast.makeText(menuActivity, "Error when connecting", Toast.LENGTH_SHORT).show();
+            Toast.makeText(menuActivity, R.string.error_connectiong, Toast.LENGTH_SHORT).show();
         }
 
         @Override

@@ -30,6 +30,18 @@
     <string name="port">"Порт: "</string>
     <string name="connect">Присоединиться</string>
     <string name="clientName">Ваш ник</string>
+    <string name="finding">Поиск</string>
+    <string name="found">Нашлись, ура</string>
+    <string name="not_found">Хостов не найдено</string>
+    <string name="turn_wifi">Пожалуйста, включите Wi-Fi</string>
+    <string name="registration_failed">Ошибка NSD</string>
+    <string name="error_start_listening">Ошибка NSD</string>
+    <string name="waiting_for_connected">Ждем подключений</string>
+    <string name="connection_refused">В подключении отказано</string>
+    <string name="error_connectiong">Ошибка при подключении</string>
+    <string name="fill_the_gaps">Заполните все поля</string>
+    <string name="resolve_failed">Ошибка NSD</string>
+    <string name="discovery_failed">Ошибка NSD</string>
 
 
 </resources>

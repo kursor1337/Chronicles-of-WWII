@@ -267,6 +267,7 @@ public class HUD {
                 update();
                 return division;
             }
+            button.setEnabled(false);
             return null;
         }
 

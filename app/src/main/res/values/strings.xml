@@ -30,6 +30,18 @@
     <string name="port">Port: </string>
     <string name="connect">Connect</string>
     <string name="clientName">Your name</string>
+    <string name="finding">Finding</string>
+    <string name="found">Found yay</string>
+    <string name="not_found">No hosts found</string>
+    <string name="turn_wifi">Please, turn on the Wi-Fi</string>
+    <string name="registration_failed">Registration Failed</string>
+    <string name="error_start_listening">Error when start listening</string>
+    <string name="waiting_for_connected">Waiting for connected</string>
+    <string name="connection_refused">Connection refused</string>
+    <string name="error_connectiong">Error when connecting</string>
+    <string name="fill_the_gaps">Fill the gaps</string>
+    <string name="resolve_failed">Resolve Failed</string>
+    <string name="discovery_failed">Discovery Failed</string>
 
 
 </resources>

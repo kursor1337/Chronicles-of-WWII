@@ -7,7 +7,6 @@ import com.kypcop.chroniclesofwwii.game.logic.divisions.InfantryDivision;
 import com.kypcop.chroniclesofwwii.game.logic.divisions.Type;
 import com.kypcop.chroniclesofwwii.game.logic.player.Player;
 import com.kypcop.chroniclesofwwii.game.screen.gameElements.HUD;
-import com.kypcop.chroniclesofwwii.game.screen.gameElements.TileView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,11 +32,6 @@ public class AddMove{
                 break;
         }
     }
-
-    AddMove(@NotNull HUD.Control start, @NotNull TileView destination){
-        this(start, destination.getTile());
-    }
-
 
     public Tile getDestination(){
         return destination;

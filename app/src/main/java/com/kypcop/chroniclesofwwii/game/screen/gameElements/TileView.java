@@ -97,17 +97,14 @@ public class TileView {
         setImage(R.drawable.empty);
     }
 
-    public void hideIsLegal(){
+    void hideIsLegal(){
         Log.i("TileView", "Hide is legal");
-        if(isOccupied()){
-            removeLayer(R.drawable.attacked);
-        } else{
-            removeLayer(R.drawable.legal);
-        }
+        removeLayer(R.drawable.attacked);
+        removeLayer(R.drawable.legal);
         state = STATE_NORMAL;
     }
 
-    public void showIsLegal(){
+    void showIsLegal(){
         if(!tile.isOccupied()){
             addLayer(R.drawable.legal);
             state = STATE_LEGAL;
@@ -146,7 +143,10 @@ public class TileView {
     }
 
     private void removeLayer(@DrawableRes int id){
-        layerMap.remove(id);
+        Drawable d = layerMap.remove(id);
+        if(d != null) d.setAlpha(0);
+        else return;
+        Log.i("TileView", d + "");
         Drawable[] ds = new Drawable[layerMap.size()];
         ds = layerMap.values().toArray(ds);
         layerDrawable = new LayerDrawable(ds);

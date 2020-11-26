@@ -11,6 +11,17 @@
         android:textSize="22sp"
         />
 
+    <EditText
+        android:paddingVertical="6dp"
+        android:background="@drawable/drawable_button"
+        android:textSize="22sp"
+        android:id="@+id/client_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/choose_host_name"
+        android:textAlignment="center"
+        android:lines="1"/>
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
