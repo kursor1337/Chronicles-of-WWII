@@ -81,7 +81,9 @@ public class GameActivity extends AppCompatActivity{
         public void onClick(View v) {
             if(chosenControl != null && selectedTileView != null){
                 chosenControl.addDivision(selectedTileView.getDivision());
+                boardLayout.hideLegalMoves();
             }
+            selectedTileView = null;
             chosenControl = hud.getControlByButtonId(v.getId());
             Log.i(TAG, "HUD click, type = " + chosenControl.type);
             int row;
@@ -312,10 +314,12 @@ public class GameActivity extends AppCompatActivity{
         if(tileV.getDivision().getKeeper() != me) return false;
         if(tileV == selectedTileView){
             boardLayout.hideLegalMoves();
+            selectedTileView = null;
             return false;
         }
         if (selectedTileView != null && selectedTileView.getDivision().getKeeper() == me) {
             boardLayout.hideLegalMoves();
+            selectedTileView = tileV;
             return true;
         }
         return chosenControl == null;

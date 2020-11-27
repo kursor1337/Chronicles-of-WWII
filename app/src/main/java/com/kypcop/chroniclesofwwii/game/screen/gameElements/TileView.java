@@ -93,7 +93,6 @@ public class TileView {
 
     public void clearTileView(){
         if(tile.isOccupied()) tile.clearTile();
-        imageView.setBackgroundResource(R.drawable.empty);
         setImage(R.drawable.empty);
     }
 
