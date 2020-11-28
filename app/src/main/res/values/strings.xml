@@ -42,6 +42,8 @@
     <string name="fill_the_gaps">Fill the gaps</string>
     <string name="resolve_failed">Resolve Failed</string>
     <string name="discovery_failed">Discovery Failed</string>
+    <string name="you_won">You won!!! )))))</string>
+    <string name="you_lose">You lose. (((((</string>
 
 
 </resources>

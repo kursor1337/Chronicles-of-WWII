@@ -238,9 +238,9 @@ public class GameActivity extends AppCompatActivity{
     public void buildAlertMessageEndOfTheGame(boolean win) {
         String result;
         if(win){
-            result = "Вы победили!\nЮХУУУУУ!!!";
+            result = getString(R.string.you_won);
         } else{
-            result = "Вы проиграли!\nАХАХАХ, ЛОХ!!!";
+            result = getString(R.string.you_lose);
         }
         SimpleDialogFragment dialog = new SimpleDialogFragment.Builder(this)
                 .setMessage(result).setCancelable(false)

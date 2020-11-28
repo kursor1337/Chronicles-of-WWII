@@ -42,6 +42,8 @@
     <string name="fill_the_gaps">Заполните все поля</string>
     <string name="resolve_failed">Ошибка NSD</string>
     <string name="discovery_failed">Ошибка NSD</string>
+    <string name="you_won">Вы победили! ЮХУУУУУ!!!</string>
+    <string name="you_lose">Вы проиграли! (((((</string>
 
 
 </resources>
