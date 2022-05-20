@@ -11,12 +11,13 @@ import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
 
 open class Connection(
-        private val mActivity: Activity,
-        input: BufferedReader,
-        output: PrintWriter,
-        val host: Host,
-        private val mSendListener: SendListener,
-        receiveListener: ReceiveListener) {
+    private val mActivity: Activity,
+    input: BufferedReader,
+    output: PrintWriter,
+    val host: Host,
+    private val mSendListener: SendListener,
+    receiveListener: ReceiveListener
+) {
 
     var mReceiveListener = receiveListener
 
@@ -28,39 +29,40 @@ open class Connection(
         mReceiver.startReceiving()
     }
 
-    interface SendListener{
+    interface SendListener {
         fun onSendSuccess()
         fun onSendFailure(e: Exception)
     }
 
-    interface ReceiveListener{
+    interface ReceiveListener {
         fun onReceive(string: String)
     }
 
-    fun send(string: String){
+    fun send(string: String) {
         mSender.send(string)
     }
 
-    fun dispose(){
+    fun dispose() {
         Log.i("Connection", "Disposing")
         mReceiver.dispose()
         mSender.stopSending()
         Log.i("Connection", "Disposed")
     }
 
-    inner class Sender(private val output: PrintWriter){
+    inner class Sender(private val output: PrintWriter) {
 
         val mMessageQueue: BlockingQueue<String> = ArrayBlockingQueue(10)
         private var sending = true
+
         init {
             SenderThread().start()
         }
 
-        fun send(string: String){
+        fun send(string: String) {
             mMessageQueue.put(string)
         }
 
-        private inner class SenderThread : Thread(){
+        private inner class SenderThread : Thread() {
 
             override fun run() {
                 while (sending) {
@@ -73,7 +75,7 @@ open class Connection(
                 }
             }
 
-            fun sendMessage(string: String){
+            fun sendMessage(string: String) {
                 try {
                     Log.e("Sender", "Connected, Sending: $string")
                     output.println(string)
@@ -83,7 +85,7 @@ open class Connection(
                 } catch (e: Exception) {
                     e.printStackTrace()
                     Log.i("Sender", "_____")
-                    mActivity.runOnUiThread{
+                    mActivity.runOnUiThread {
                         Toast.makeText(mActivity, "Message not sent", Toast.LENGTH_SHORT).show()
                         mSendListener.onSendFailure(e)
                     }
@@ -92,7 +94,7 @@ open class Connection(
             }
         }
 
-        fun stopSending(){
+        fun stopSending() {
             Log.i("Sender", "Stopping")
             sending = false
         }
@@ -102,7 +104,7 @@ open class Connection(
 
         private val receiverThread = ReceiverThread()
 
-        fun startReceiving(){
+        fun startReceiving() {
             receiverThread.start()
         }
 

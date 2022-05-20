@@ -76,10 +76,13 @@ public class Player {
         switch(type){
             case INFANTRY:
                 infantry--;
+                break;
             case ARMORED:
                 armored--;
+                break;
             case ARTILLERY:
                 artillery--;
+                break;
         }
     }
 

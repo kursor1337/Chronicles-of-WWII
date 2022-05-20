@@ -35,7 +35,8 @@ object Const {
 
         @JvmStatic
         fun validIP(ip: String?): Boolean {
-            return if (ip == null || ip.length < 7 || ip.length > 15) false else try {
+            return if (ip == null || ip.length < 7 || ip.length > 15) false
+            else try {
                 var x = 0
                 var y = ip.indexOf('.')
                 if (y == -1 || ip[x] == '-' || ip.substring(x, y).toInt() > 255) return false

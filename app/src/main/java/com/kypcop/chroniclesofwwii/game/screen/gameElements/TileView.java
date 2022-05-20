@@ -83,6 +83,7 @@ public class TileView {
         Drawable[] ds = new Drawable[0];
         ds = layerMap.values().toArray(ds);
         layerDrawable = new LayerDrawable(ds);
+        imageView.setImageResource(0);
         imageView.setImageDrawable(layerDrawable);
         Log.i("TileView", "Set image " + layerDrawable + " length = " + layerDrawable.getNumberOfLayers());
     }

@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.kypcop.chroniclesofwwii.game.logic.Nation;
 import com.kypcop.chroniclesofwwii.game.logic.player.Player;
 
-public class Mission implements Cloneable{
+public class Mission implements Cloneable {
 
     private static final transient Gson gson = new Gson();
     public static final int DEFAULT = -865;
@@ -21,7 +21,7 @@ public class Mission implements Cloneable{
 
     public Mission(int id, String name, String intro,
                    Nation enemy1, int player1Infantry, int player1Armored, int player1Artillery,
-                   Nation enemy2, int player2Infantry, int player2Armored, int player2Artillery){
+                   Nation enemy2, int player2Infantry, int player2Armored, int player2Artillery) {
         this.id = id;
         this.name = name;
         this.intro = intro;
@@ -29,11 +29,11 @@ public class Mission implements Cloneable{
         playerMe = new Player(Player.ROLE_ME, 0, enemy2, player2Infantry, player2Armored, player2Artillery);
     }
 
-    public void setIntro(String id){
+    public void setIntro(String id) {
         intro = id;
     }
 
-    public String getIntro(){
+    public String getIntro() {
         return intro;
     }
 
@@ -42,22 +42,26 @@ public class Mission implements Cloneable{
         return playerEnemy;
     }
 
-    public void invertPlayers(){
-        Player inter = playerEnemy;
+    public void invertPlayers() {
+        final Player inter = playerEnemy;
         playerEnemy = playerMe;
         playerEnemy.invertRole();
         playerMe = inter;
         playerMe.invertRole();
+
+
+
     }
 
-    public Player getMePlayer(){
+    public Player getMePlayer() {
         return playerMe;
     }
+
     public String getMissionName() {
         return name;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
@@ -75,14 +79,14 @@ public class Mission implements Cloneable{
         return getMissionName();
     }
 
-    public static String toJson(Mission mission){
+    public static String toJson(Mission mission) {
         return gson.toJson(mission);
     }
 
-    public static Mission fromJson(String string){
-        try{
+    public static Mission fromJson(String string) {
+        try {
             return gson.fromJson(string, Mission.class);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

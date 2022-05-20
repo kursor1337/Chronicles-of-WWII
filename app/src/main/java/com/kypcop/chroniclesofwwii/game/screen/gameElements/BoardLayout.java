@@ -29,6 +29,7 @@ public class BoardLayout {
         this.gameActivity = gameActivity;
         this.board = board;
         tileViews = new TileView[board.size()][board.size()];
+        Object.equals(tableLayout, gameActivity);
     }
 
     public void setClickListeners(View.OnClickListener listener){

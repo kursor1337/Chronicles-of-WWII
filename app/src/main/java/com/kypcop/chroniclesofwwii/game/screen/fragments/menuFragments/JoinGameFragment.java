@@ -1,5 +1,16 @@
 package com.kypcop.chroniclesofwwii.game.screen.fragments.menuFragments;
 
+import static com.kypcop.chroniclesofwwii.game.Const.connection.ACCEPTED;
+import static com.kypcop.chroniclesofwwii.game.Const.connection.CANCEL_CONNECTION;
+import static com.kypcop.chroniclesofwwii.game.Const.connection.CLIENT;
+import static com.kypcop.chroniclesofwwii.game.Const.connection.CONNECTED_DEVICE;
+import static com.kypcop.chroniclesofwwii.game.Const.connection.INVALID_JSON;
+import static com.kypcop.chroniclesofwwii.game.Const.connection.REJECTED;
+import static com.kypcop.chroniclesofwwii.game.Const.connection.REQUEST_FOR_ACCEPT;
+import static com.kypcop.chroniclesofwwii.game.Const.connection.REQUEST_MISSION_INFO;
+import static com.kypcop.chroniclesofwwii.game.Const.game.MISSION;
+import static com.kypcop.chroniclesofwwii.game.Const.game.MULTIPLAYER_GAME_MODE;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,17 +48,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static com.kypcop.chroniclesofwwii.game.Const.connection.ACCEPTED;
-import static com.kypcop.chroniclesofwwii.game.Const.connection.CANCEL_CONNECTION;
-import static com.kypcop.chroniclesofwwii.game.Const.connection.CLIENT;
-import static com.kypcop.chroniclesofwwii.game.Const.connection.CONNECTED_DEVICE;
-import static com.kypcop.chroniclesofwwii.game.Const.connection.INVALID_JSON;
-import static com.kypcop.chroniclesofwwii.game.Const.connection.REJECTED;
-import static com.kypcop.chroniclesofwwii.game.Const.connection.REQUEST_FOR_ACCEPT;
-import static com.kypcop.chroniclesofwwii.game.Const.connection.REQUEST_MISSION_INFO;
-import static com.kypcop.chroniclesofwwii.game.Const.game.MISSION;
-import static com.kypcop.chroniclesofwwii.game.Const.game.MULTIPLAYER_GAME_MODE;
-
 public class JoinGameFragment extends Fragment {
 
     NsdHelper nsdHelper;
@@ -65,7 +65,7 @@ public class JoinGameFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_connect, new LinearLayout(menuActivity), false);
+        View view = inflater.inflate(R.layout.fragment_join_game, new LinearLayout(menuActivity), false);
 
         clientNameEditText = view.findViewById(R.id.client_name_edittext);
         nsdHelper = new NsdHelper(menuActivity, nsdListener);
