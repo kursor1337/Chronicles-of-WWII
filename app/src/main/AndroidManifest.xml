@@ -8,6 +8,9 @@
         android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission
         android:required="true"
+        android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission
+        android:required="true"
         android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission
         android:required="true"
@@ -28,7 +31,8 @@
         android:theme="@style/Theme.AppCompat.Light">
         <activity android:name=".game.screen.activities.MenuActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="LockedOrientationActivity"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

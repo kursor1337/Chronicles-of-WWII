@@ -140,7 +140,7 @@ class NsdHelper private constructor(private val mActivity: Activity,
         try{
             mNsdManager.unregisterService(mNsdRegistrationListener)
         } catch (e: Exception) {
-            Log.i(TAG, e.message)
+            Log.i(TAG, e.message!!)
         }
     }
 
@@ -154,7 +154,7 @@ class NsdHelper private constructor(private val mActivity: Activity,
         try{
             mNsdManager.stopServiceDiscovery(mNsdDiscoveryListener)
         } catch (e: Exception) {
-            Log.i(TAG, e.message)
+            Log.i(TAG, e.message!!)
         }
     }
 
